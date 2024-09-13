@@ -51,7 +51,7 @@ def send_slack_message(webhook_url, message):
 
 
 # Slack 웹훅 URL 설정
-SLACK_WEBHOOK_URL = os.environ['SLACK_WEBHOOK_URL']
+SLACK_WEBHOOK_URL = os.environ['https://hooks.slack.com/services/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']
 
 # 엑셀 파일 경로 (GitHub Actions 환경에서의 경로)
 file_path = 'stock_data.xlsx'
@@ -98,4 +98,3 @@ try:
     print("Slack 메시지가 성공적으로 전송되었습니다.")
 except Exception as e:
     print(f"Slack 메시지 전송 중 오류 발생: {str(e)}")
-    
