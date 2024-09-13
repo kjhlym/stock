@@ -23,7 +23,7 @@ jobs:
 
     - name: Run stock analysis script
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.https://hooks.slack.com/services/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 }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       run: python stock_analysis_script.py
 
     - name: Commit and push if changed
