@@ -1,0 +1,35 @@
+name: Stock Analysis
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 매일 UTC 1:00 (한국 시간 10:00)에 실행
+  workflow_dispatch:  # 수동 실행 옵션
+
+jobs:
+  analyze_stocks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas selenium webdriver_manager requests openpyxl
+
+    - name: Run stock analysis script
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.https://hooks.slack.com/services/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 }}
+      run: python stock_analysis_script.py
+
+    - name: Commit and push if changed
+      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add stock_data.xlsx
+        git commit -m "Update stock data" || exit 0
+        git push
