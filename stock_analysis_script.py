@@ -42,6 +42,12 @@ def get_element_text(url, xpath):
         driver.quit()
 
 
+def post_message(token, channel, text):
+    response = requests.post("https://slack.com/api/chat.postMessage",
+                             headers={"Authorization": "Bearer " + token},
+                             data={"channel": channel, "text": text}
+                             )
+
 def send_slack_message(webhook_url, message):
     payload = {"text": message}
     response = requests.post(webhook_url, json=payload)
@@ -93,9 +99,10 @@ for _, row in result_df.iterrows():
 # Slack으로 메시지 전송
 slack_message = f"주식 데이터 분석이 완료되었습니다.\n\n{result_text}"
 
+access_token = os.environ.get('SLACK_ACCESS_TOKEN')
 
 try:
-    send_slack_message(SLACK_WEBHOOK_URL, slack_message)
+    post_message(access_token,'#알람', slack_message)
     print("Slack 메시지가 성공적으로 전송되었습니다.")
 except Exception as e:
     print(f"Slack 메시지 전송 중 오류 발생: {str(e)}")
