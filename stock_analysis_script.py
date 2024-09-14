@@ -51,7 +51,7 @@ def send_slack_message(webhook_url, message):
 
 
 # Slack 웹훅 URL 설정
-SLACK_WEBHOOK_URL = os.environ['SLACK_WEBHOOK_URL']
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 
 # 엑셀 파일 경로 (GitHub Actions 환경에서의 경로)
 file_path = 'stock_data.xlsx'
