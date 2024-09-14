@@ -24,7 +24,7 @@ jobs:
 
       - name: Run stock analysis script
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_ACCESS_TOKEN: ${{ secrets.SLACK_ACCESS_TOKEN }}
         run: python stock_analysis_script.py
 
       - name: Commit and push if changed
