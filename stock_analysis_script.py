@@ -10,7 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 import os
 import requests
-
+import json
 
 def create_driver():
     chrome_options = Options()
@@ -51,8 +51,7 @@ def send_slack_message(webhook_url, message):
 
 
 # Slack 웹훅 URL 설정
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
-
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 # 엑셀 파일 경로 (GitHub Actions 환경에서의 경로)
 file_path = 'stock_data.xlsx'
 
@@ -93,6 +92,8 @@ for _, row in result_df.iterrows():
 
 # Slack으로 메시지 전송
 slack_message = f"주식 데이터 분석이 완료되었습니다.\n\n{result_text}"
+
+
 try:
     send_slack_message(SLACK_WEBHOOK_URL, slack_message)
     print("Slack 메시지가 성공적으로 전송되었습니다.")
